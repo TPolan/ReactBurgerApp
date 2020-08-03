@@ -1,12 +1,13 @@
 import React from 'react';
 import Auxiliary from '../../../HOC/Auxiliary';
+import Button from '../../UI/Button/Button';
 
 function orderSummary(props) {
 
     const ingredientSummary = Object.keys(props.ingredients).map(
         igKey => {
             return (
-                <li>
+                <li key={igKey}>
                     <span style={{textTransform: 'capitalize'}}>{igKey}</span>:{props.ingredients[igKey]}
                 </li>
             )
@@ -20,7 +21,10 @@ function orderSummary(props) {
             <ul>
                 {ingredientSummary}
             </ul>
-            <p>Continue to checkout</p>
+            <p><strong>Total Price: {props.price.toFixed(2)}</strong></p>
+            <p>Continue to Checkout?</p>
+            <Button clicked={props.purchaseCanceled} btnType='Danger'>CANCEL</Button>
+            <Button clicked={props.purchaseContinued} btnType='Success'>CONTINUE</Button>
         </Auxiliary>
 
     );
